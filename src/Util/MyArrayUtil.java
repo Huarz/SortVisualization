@@ -6,12 +6,11 @@ import java.util.regex.Pattern;
 
 public class MyArrayUtil {
 
+    //这个方法是否需要使用存疑
     //打印数组
-    public static void printArr(ArrayList<Integer>arr) {
-        for (Integer integer : arr) {
-            System.out.println(integer);
-        }
-    }
+//    public static String printArr(ArrayList<Integer>arr) {
+////        return arr.toString();
+////    }
 
     //将字符串转化成Integer数组
     public static ArrayList<Integer> getIntArr(String str) {
@@ -28,7 +27,7 @@ public class MyArrayUtil {
         return integers;
     }
 
-    // 检测字符串的合理性
+    // 检测字符串转化成数组的合理性
     public static boolean isValidStr(String input) {
 
         String trimmedInput = input.trim();
@@ -36,6 +35,16 @@ public class MyArrayUtil {
         return trimmedInput.matches("(\\d+\\s+)+\\d+") && !trimmedInput.isEmpty();
     }
 
+    //得到数组最大值
+    public static Integer getMax(ArrayList<Integer>arr){
+            int max = arr.getFirst();
+            for (int value : arr) {
+                if (value > max) {
+                    max = value;
+                }
+            }
+            return max;
+    }
 }
 
 
