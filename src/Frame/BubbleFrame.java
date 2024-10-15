@@ -120,8 +120,12 @@ public final class BubbleFrame extends SortFrame {
             sorting = false; // 停止排序
         }
 
-        // 在startSorting方法的内部使用一个标志位来判断是否为用户停止排序
+        private boolean isSorting = false; // 添加一个标志位来表示是否正在排序
+
         public void startSorting() {
+            if (isSorting) return; // 如果已经在排序中，则返回
+            isSorting = true; // 设置为正在排序
+
             stopSorting(); // 确保从前一个状态停止
             sorting = true;
 
@@ -129,6 +133,7 @@ public final class BubbleFrame extends SortFrame {
                 @Override
                 protected Void doInBackground() {
                     for (int j = 0; j < sortedBoundary - 1 && sorting; j++) {
+                        boolean swapped = false;
                         for (int i = 0; i < sortedBoundary - 1 - j && sorting; i++) {
                             currentComparisonIndex1 = i;
                             currentComparisonIndex2 = i + 1;
@@ -139,22 +144,26 @@ public final class BubbleFrame extends SortFrame {
                                 int temp = array.get(i);
                                 array.set(i, array.get(i + 1));
                                 array.set(i + 1, temp);
+                                swapped = true;
                             }
 
-
                             try {
-                                Thread.sleep(2000); // 控制速度
+                                Thread.sleep(1000); // 控制速度
                             } catch (InterruptedException e) {
                                 e.printStackTrace();
                             }
                         }
                         sortedBoundary--; // 每完成一轮，减少已排序部分的大小
+                        if (!swapped) {
+                            break; // 如果没有进行交换，说明已经排序完成，跳出循环
+                        }
                     }
                     return null;
                 }
 
                 @Override
                 protected void done() {
+                    isSorting = false; // 排序完成，重置标志位
                     if (sorting) { // 检查是否是正常完成排序
                         stopButton.setEnabled(false);
                         startButton.setEnabled(false);
@@ -165,6 +174,7 @@ public final class BubbleFrame extends SortFrame {
                 }
             }.execute();
         }
+
 
 
 
