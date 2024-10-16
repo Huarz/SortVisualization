@@ -94,6 +94,9 @@ public final class BubbleFrame extends SortFrame {
     private void updatePanel() {
         usedArr.clear();
         usedArr.addAll(inputArr);
+        comparisonCount=0;
+        startButton.setEnabled(true);
+        startButton.setBackground(Color.GREEN);
         panel = new SortingVisualizer(usedArr); // 生成新可视化面板
         this.getContentPane().removeAll(); // 移除旧的面板
         this.setLayout(new BorderLayout());
@@ -106,8 +109,8 @@ public final class BubbleFrame extends SortFrame {
     class SortingVisualizer extends JPanel {
         private final ArrayList<Integer> array;
         private boolean sorting;
-        private int currentComparisonIndex1 = -1; // 当前比较的第一个元素索引
-        private int currentComparisonIndex2 = -1; // 当前比较的第二个元素索引
+        private int currentComparisonIndex1 = 0; // 当前比较的第一个元素索引
+        private int currentComparisonIndex2 = 0; // 当前比较的第二个元素索引
         private int sortedBoundary ; // 表示已排序元素的边界
 
         public SortingVisualizer(ArrayList<Integer> array) {
@@ -134,21 +137,23 @@ public final class BubbleFrame extends SortFrame {
                 protected Void doInBackground() {
                     for (int j = 0; j < sortedBoundary - 1 && sorting; j++) {
                         boolean swapped = false;
-                        for (int i = 0; i < sortedBoundary - 1 - j && sorting; i++) {
+                        for (int i = 0; i < sortedBoundary - 1  && sorting; i++) {
                             currentComparisonIndex1 = i;
                             currentComparisonIndex2 = i + 1;
                             comparisonCount++;
 
-                            repaint(); // 绘制图形
+
                             if (array.get(i) > array.get(i + 1)) {
                                 int temp = array.get(i);
                                 array.set(i, array.get(i + 1));
                                 array.set(i + 1, temp);
                                 swapped = true;
                             }
+                            repaint(); // 绘制图形
+                            updateLabels();
 
                             try {
-                                Thread.sleep(1000); // 控制速度
+                                Thread.sleep(100); // 控制速度
                             } catch (InterruptedException e) {
                                 e.printStackTrace();
                             }
@@ -165,6 +170,9 @@ public final class BubbleFrame extends SortFrame {
                 protected void done() {
                     isSorting = false; // 排序完成，重置标志位
                     if (sorting) { // 检查是否是正常完成排序
+                        currentComparisonIndex1=-1;
+                        currentComparisonIndex2=-1;
+                        repaint();
                         stopButton.setEnabled(false);
                         startButton.setEnabled(false);
                         stopButton.setBackground(Color.gray);
@@ -193,7 +201,7 @@ public final class BubbleFrame extends SortFrame {
                 if(sorting) {
                     if (i == currentComparisonIndex1 || i == currentComparisonIndex2) {
                         g.setColor(new Color(255, 165, 0, 150)); // 橙色表示正在比较
-                    } else if (i >= sortedBoundary) {
+                    } else if (i >= sortedBoundary|| (currentComparisonIndex1 == -1 && currentComparisonIndex2 == -1)) {
                         g.setColor(new Color(144, 238, 144, 150)); // 绿色表示已排序
                     } else {
                         g.setColor(new Color(100, 149, 237, 150)); // 默认颜色

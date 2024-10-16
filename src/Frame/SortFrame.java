@@ -17,7 +17,6 @@ public abstract class SortFrame extends MyFrame {
         if(MyFrame.input) {
             dataInputDialog();
         }
-
     }
 
 
@@ -43,6 +42,23 @@ public abstract class SortFrame extends MyFrame {
         JPanel panel = new JPanel();
         panel.setLayout(new FlowLayout(FlowLayout.CENTER));
         panel.add(confirmButton); // 将确认按钮添加到面板中
+
+        dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+                // 阻止关闭操作，可以弹出一个提示框
+                int result = JOptionPane.showConfirmDialog(dialog, "您确定要关闭输入吗?", "关闭确认",
+                        JOptionPane.YES_NO_OPTION);
+                if (result == JOptionPane.NO_OPTION) {
+                    dialog.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
+                } else {
+                    dialog.dispose();
+                    dispose();
+                    new chooseFrame(); // 确认关闭时，关闭对话框
+                }
+            }
+        });
+
 
         // 将面板添加到对话框的底部
         dialog.add(panel, BorderLayout.SOUTH);
