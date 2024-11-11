@@ -1,7 +1,6 @@
 package Frame;
 
 import Util.MyArrayUtil;
-
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
@@ -18,9 +17,6 @@ public abstract class SortFrame extends MyFrame {
             dataInputDialog();
         }
     }
-
-
-
 
     //输入的模态对话框
     public void dataInputDialog(){

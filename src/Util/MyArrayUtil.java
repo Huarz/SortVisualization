@@ -45,6 +45,17 @@ public class MyArrayUtil {
             }
             return max;
     }
+
+    //得到数组最小值
+    public static Integer getMin(ArrayList<Integer>arr){
+            int min = arr.getFirst();
+            for (int value : arr) {
+                if (value < min) {
+                    min = value;
+                }
+            }
+            return min;
+    }
 }
 
 

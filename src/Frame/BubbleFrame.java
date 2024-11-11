@@ -111,7 +111,7 @@ public final class BubbleFrame extends SortFrame {
         private boolean sorting;
         private int currentComparisonIndex1 = 0; // 当前比较的第一个元素索引
         private int currentComparisonIndex2 = 0; // 当前比较的第二个元素索引
-        private int sortedBoundary ; // 表示已排序元素的边界
+        private int sortedBoundary; // 表示已排序元素的边界
 
         public SortingVisualizer(ArrayList<Integer> array) {
             this.array = array;
@@ -135,14 +135,12 @@ public final class BubbleFrame extends SortFrame {
             new SwingWorker<Void, Void>() {
                 @Override
                 protected Void doInBackground() {
-                    for (int j = 0; j < sortedBoundary - 1 && sorting; j++) {
+                    for (int j = 0; j < array.size() - 1 && sorting; j++) {
                         boolean swapped = false;
                         for (int i = 0; i < sortedBoundary - 1  && sorting; i++) {
                             currentComparisonIndex1 = i;
                             currentComparisonIndex2 = i + 1;
                             comparisonCount++;
-
-
                             if (array.get(i) > array.get(i + 1)) {
                                 int temp = array.get(i);
                                 array.set(i, array.get(i + 1));
@@ -151,9 +149,8 @@ public final class BubbleFrame extends SortFrame {
                             }
                             repaint(); // 绘制图形
                             updateLabels();
-
                             try {
-                                Thread.sleep(100); // 控制速度
+                                Thread.sleep(500); // 控制速度
                             } catch (InterruptedException e) {
                                 e.printStackTrace();
                             }
