@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public final class chooseFrame extends MyFrame {
 
-    public ArrayList<Integer> inputArr = new ArrayList<>();
+
 
     public chooseFrame() {
         this.setTitle("选择界面");
@@ -21,25 +21,22 @@ public final class chooseFrame extends MyFrame {
         this.add(promptLabel, BorderLayout.NORTH);
 
         // 按钮面板
-        JPanel buttonPanel = new JPanel(new GridLayout(5, 2, 10, 10));
+        JPanel buttonPanel = new JPanel(new GridLayout(3, 3, 20, 20));
         buttonPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
         initButton(buttonPanel);
         this.add(buttonPanel, BorderLayout.CENTER);
     }
 
-    public void setInputArr(ArrayList<Integer> inputArr) {
-        this.inputArr = inputArr;
-        MyFrame.input = false;
-    }
+
 
     // 按钮初始化
     private void initButton(JPanel buttonPanel) {
 
         JButton bubbleBtn = new JButton("BubbleSort");
         JButton quickBtn = new JButton("QuickSort");
-        JButton mergeRecursiveBtn = new JButton("MergeRecursiveSort");
-        JButton mergeNonRecursiveBtn = new JButton("MergeNonRecursiveSort");
+        JButton mergeRecursiveBtn = new JButton("MergeSort");
+
         JButton heapBtn = new JButton("HeapSort");
         JButton shellBtn = new JButton("ShellSort");
         JButton countingBtn = new JButton("CountingSort");
@@ -58,10 +55,6 @@ public final class chooseFrame extends MyFrame {
         });
         mergeRecursiveBtn.addActionListener(_ -> {
             SwingUtilities.invokeLater(() -> new MergeRecursiveFrame());
-            dispose();
-        });
-        mergeNonRecursiveBtn.addActionListener(_ -> {
-            SwingUtilities.invokeLater(() -> new MergeNonRecursiveFrame());
             dispose();
         });
         heapBtn.addActionListener(_ -> {
@@ -93,7 +86,6 @@ public final class chooseFrame extends MyFrame {
                 bubbleBtn,
                 quickBtn,
                 mergeRecursiveBtn,
-                mergeNonRecursiveBtn,
                 heapBtn,
                 shellBtn,
                 countingBtn,

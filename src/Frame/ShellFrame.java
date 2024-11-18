@@ -12,7 +12,7 @@ public final class ShellFrame extends SortFrame {
     private int comparisonCount = 0; // 比较次数计数器
 
     public ShellFrame() {
-        this.setTitle("BubbleSort");
+        this.setTitle("Shell Sort");
         initJMenuBar();
         panel = new SortingVisualizer(usedArr);
         this.setLayout(new BorderLayout());
@@ -47,7 +47,7 @@ public final class ShellFrame extends SortFrame {
         });
 
         controlPanel.add(startButton);
-        controlPanel.add(stopButton);
+        //controlPanel.add(stopButton);
         controlPanel.add(countLabel);
 
         this.getContentPane().add(controlPanel, BorderLayout.SOUTH); // 将控制面板添加到主面板底部
@@ -75,7 +75,7 @@ public final class ShellFrame extends SortFrame {
         });
         otherAlgorithmsItem.addActionListener(_ -> {
             new chooseFrame();
-            MyFrame.input = false;
+
         });
 
         // 添加菜单项
@@ -115,8 +115,7 @@ public final class ShellFrame extends SortFrame {
 
         public SortingVisualizer(ArrayList<Integer> array) {
             this.array = array;
-
-            setPreferredSize(new Dimension(1000, 600));
+            setPreferredSize(new Dimension(1100, 800));
         }
 
         public void stopSorting() {

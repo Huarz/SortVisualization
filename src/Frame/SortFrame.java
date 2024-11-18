@@ -13,9 +13,9 @@ public abstract class SortFrame extends MyFrame {
     public ArrayList<Integer> usedArr=new ArrayList<>();
 
     public SortFrame() {
-        if(MyFrame.input) {
+
             dataInputDialog();
-        }
+
     }
 
     //输入的模态对话框
