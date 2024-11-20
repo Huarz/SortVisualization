@@ -165,7 +165,7 @@ public final class CountingFrame extends SortFrame {
                             e.printStackTrace();
                         }
                     }
-                    sorting=true;
+
                     return null;
                 }
 

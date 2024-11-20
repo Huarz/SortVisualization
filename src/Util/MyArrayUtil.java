@@ -6,12 +6,6 @@ import java.util.regex.Pattern;
 
 public class MyArrayUtil {
 
-    //这个方法是否需要使用存疑
-    //打印数组
-//    public static String printArr(ArrayList<Integer>arr) {
-////        return arr.toString();
-////    }
-
     //将字符串转化成Integer数组
     public static ArrayList<Integer> getIntArr(String str) {
 
@@ -55,6 +49,12 @@ public class MyArrayUtil {
                 }
             }
             return min;
+    }
+
+    //删除数组最大值
+    public static void removeMin(ArrayList<Integer>arr){
+            int min = getMin(arr);
+            arr.remove(Integer.valueOf(min));
     }
 }
 

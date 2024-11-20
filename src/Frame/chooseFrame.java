@@ -3,7 +3,6 @@ package Frame;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.util.ArrayList;
 
 public final class chooseFrame extends MyFrame {
 
@@ -42,7 +41,7 @@ public final class chooseFrame extends MyFrame {
         JButton countingBtn = new JButton("CountingSort");
         JButton insertionBtn = new JButton("InsertionSort");
         JButton selectionBtn = new JButton("SelectionSort");
-        JButton bucketBtn = new JButton("BucketSort");
+        JButton radixBtn = new JButton("RadixSort");
 
         // 为每一个按钮添加事件监听
         bubbleBtn.addActionListener(_ -> {
@@ -77,8 +76,8 @@ public final class chooseFrame extends MyFrame {
             SwingUtilities.invokeLater(() -> new SelectionFrame());
             dispose();
         });
-        bucketBtn.addActionListener(_ -> {
-            SwingUtilities.invokeLater(() -> new BucketFrame());
+        radixBtn.addActionListener(_ -> {
+            SwingUtilities.invokeLater(() -> new RadixFrame());
             dispose();
         });
 
@@ -91,7 +90,7 @@ public final class chooseFrame extends MyFrame {
                 countingBtn,
                 insertionBtn,
                 selectionBtn,
-                bucketBtn
+                radixBtn
         };
 
         // 将按钮添加到面板
